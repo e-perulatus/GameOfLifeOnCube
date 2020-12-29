@@ -2,7 +2,7 @@
 
 ## 概要
 
-[![thumbnail](https://pbs.twimg.com/ext_tw_video_thumb/1339214657886670848/pu/img/_nJ1LpRMRww1XDP5.jpg)(https://twitter.com/e_perulatus/status/1339214711989043200/video/1)
+* ![Thumbnail](images/thumbnail.jpg)
 
 ## 操作方法
 
