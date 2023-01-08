@@ -2,7 +2,9 @@
 #include <M5Core2.h>
 
 #define LGFX_M5STACK_CORE2
+#define LGFX_USE_V1
 #include <LovyanGFX.hpp>
+#include <LGFX_AUTODETECT.hpp>
 
 #include "MFrameWork.h"
 #include "GameOfLifeOnCube.h"
