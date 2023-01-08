@@ -175,24 +175,35 @@ namespace {
 
 void DrawTaskFunction(void*)
 {
+    uint32_t drawFrameCountPerSecond = 0;
     uint32_t drawFrameCount = 0;
+    auto startTick = micros();
 
     while (true)
     {
-        auto startTick = millis();
-
         while (uxQueueMessagesWaiting(::g_Queue) == 0)
         {
             delay(1);
         }
 
-        ::g_BaseSprite[drawFrameCount % 2].pushSprite(24, 20);
-
-        auto drawTick = millis() - startTick;
+        ::g_BaseSprite[(g_FrameCount + 1) % 2].pushSprite(24, 20);
         g_Lcd.setCursor(10, 10);
-        g_Lcd.printf("%2.1f\n", 1000.0f / drawTick);
-
+        g_Lcd.printf("fps: %2d\n", drawFrameCountPerSecond);
         drawFrameCount++;
+
+        auto currentTick = micros();
+        auto elapsedTick = currentTick - startTick;
+        if (elapsedTick < 0)
+        {
+            startTick = currentTick;
+            drawFrameCount = 0;
+        }
+        else if (elapsedTick >= 1000000ULL)
+        {
+            startTick = currentTick;
+            drawFrameCountPerSecond = drawFrameCount;
+            drawFrameCount = 0;
+        }
 
         int command = 0;
         xQueueReceive(g_Queue, &command, 0);
